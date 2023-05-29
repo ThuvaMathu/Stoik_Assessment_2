@@ -34,16 +34,6 @@ const PaymentValidation = () => {
     );
   };
 
-  // const handleExpiryYearChange = (event) => {
-  //   setExpiryYear(event.target.value);
-  //   const currentYear = new Date().getFullYear();
-  //   const inputYear = parseInt(expiryYear, 10);
-  //   setIsValidYear(
-  //     /^\d{4}$/.test(event.target.value) &&
-  //       inputYear >= currentYear &&
-  //       inputYear <= currentYear + 3
-  //   );
-  // };
   const handleExpiryYearChange = (event) => {
     const inputYear = event.target.value;
     const sanitizedYear = inputYear.replace(/[^0-9]/g, ""); // Remove non-digit characters
@@ -63,16 +53,6 @@ const PaymentValidation = () => {
     setCVV(event.target.value);
     setIsValidCvv(/^\d{3}$/.test(event.target.value));
   };
-
-  // const isFormValid = () => {
-  //   return (
-  //     isCardNumberValid() &&
-  //     isCardholderNameValid() &&
-  //     isExpiryMonthValid() &&
-  //     isExpiryYearValid() &&
-  //     isCVVValid()
-  //   );
-  // };
 
   return (
     <div className="mt-30 layout-column justify-content-center align-items-center">
