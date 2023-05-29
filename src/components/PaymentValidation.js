@@ -3,15 +3,15 @@ import "./PaymentValidation.css";
 
 const PaymentValidation = () => {
   const [cardNumber, setCardNumber] = useState("");
-  const [isValidNumber, setIsValidNumber] = useState(false);
+  const [isValidNumber, setIsValidNumber] = useState(true);
   const [cardholderName, setCardholderName] = useState("");
-  const [isValidName, setIsValidName] = useState(false);
+  const [isValidName, setIsValidName] = useState(true);
   const [expiryMonth, setExpiryMonth] = useState("");
-  const [isValidMonth, setIsValidMonth] = useState(false);
+  const [isValidMonth, setIsValidMonth] = useState(true);
   const [expiryYear, setExpiryYear] = useState("");
-  const [isValidYear, setIsValidYear] = useState(false);
+  const [isValidYear, setIsValidYear] = useState(true);
   const [cvv, setCVV] = useState("");
-  const [isValidCvv, setIsValidCvv] = useState(false);
+  const [isValidCvv, setIsValidCvv] = useState(true);
 
   const handleCardNumberChange = (event) => {
     setCardNumber(event.target.value);
@@ -22,7 +22,7 @@ const PaymentValidation = () => {
 
   const handleCardholderNameChange = (event) => {
     setCardholderName(event.target.value);
-    setIsValidName(/^[a-zA-Z]+$/.test(event.target.value));
+    setIsValidName(/^[a-zA-Z ]+$/.test(event.target.value));
   };
 
   const handleExpiryMonthChange = (event) => {
@@ -54,6 +54,19 @@ const PaymentValidation = () => {
     setIsValidCvv(/^\d{3}$/.test(event.target.value));
   };
 
+  const checkAllValid =
+    isValidCvv &&
+    isValidYear &&
+    isValidNumber &&
+    isValidName &&
+    isValidMonth &&
+    cardNumber.length > 0 &&
+    cardholderName.length > 0 &&
+    cvv.length > 0 &&
+    expiryMonth.length > 0 &&
+    expiryYear.length > 0;
+
+  console.log("Checking all valid", checkAllValid);
   return (
     <div className="mt-30 layout-column justify-content-center align-items-center">
       <div className="card outlined" style={{ width: "650px" }}>
@@ -164,13 +177,7 @@ const PaymentValidation = () => {
                   type="submit"
                   className="mx-0"
                   data-testid="submitButton"
-                  disabled={
-                    !isValidCvv ||
-                    !isValidYear ||
-                    !isValidNumber ||
-                    !isValidName ||
-                    !isValidMonth
-                  }
+                  disabled={!checkAllValid}
                 >
                   Submit
                 </button>
